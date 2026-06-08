@@ -7,7 +7,7 @@ const titles = {
   tasks: "업무보드",
   handover: "인수인계",
   care: "고충·면담",
-  reports: "보고서",
+  reports: "월말점검",
   policies: "운영설정",
 };
 

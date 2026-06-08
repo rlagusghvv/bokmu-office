@@ -50,6 +50,10 @@
   box-sizing: border-box;
 }
 
+[hidden] {
+  display: none !important;
+}
+
 html {
   min-width: 320px;
 }
@@ -1327,6 +1331,45 @@ meter {
   font-size: 26px;
 }
 
+.month-close-table {
+  display: grid;
+  border: 1px solid var(--line);
+  border-radius: 8px;
+  overflow: auto;
+}
+
+.month-row {
+  display: grid;
+  grid-template-columns: 110px minmax(220px, 1fr) 130px minmax(170px, 0.8fr);
+  min-width: 760px;
+}
+
+.month-row span {
+  min-height: 48px;
+  border-bottom: 1px solid var(--line);
+  padding: 12px;
+  line-height: 1.45;
+}
+
+.month-row:last-child span {
+  border-bottom: 0;
+}
+
+.month-row span:first-child {
+  color: var(--teal);
+  font-weight: 800;
+}
+
+.month-head {
+  background: var(--surface-muted);
+  color: var(--muted);
+  font-weight: 800;
+}
+
+.month-head span:first-child {
+  color: var(--muted);
+}
+
 .insight-layout,
 .policy-layout {
   display: grid;
@@ -1600,6 +1643,10 @@ meter {
 
   .handover-grid {
     grid-template-columns: 1fr;
+  }
+
+  .workflow-steps article:not(:last-child)::after {
+    display: none;
   }
 }
 

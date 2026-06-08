@@ -37,6 +37,10 @@
             <i data-lucide="radio-tower"></i>
             <span>출근점검</span>
           </button>
+          <button class="nav-item" data-view="reports">
+            <i data-lucide="clipboard-check"></i>
+            <span>월말점검</span>
+          </button>
           <button class="nav-item" data-view="policies">
             <i data-lucide="sliders-horizontal"></i>
             <span>운영설정</span>
@@ -55,10 +59,14 @@
       <main class="workspace">
         <header class="topbar">
           <div>
-            <p class="eyebrow">김포시 복무관리 · 2026.06.08</p>
+            <p class="eyebrow">복무기관 내부관리 · 2026.06.08</p>
             <h1 id="view-title">대시보드</h1>
           </div>
           <div class="top-actions">
+            <span class="mode-chip">
+              <i data-lucide="shield-check"></i>
+              <span>가명자료</span>
+            </span>
             <button class="secondary-button top-cta" type="button" data-jump="leave">
               <i data-lucide="calendar-plus"></i>
               <span>신청 등록</span>
@@ -115,6 +123,38 @@
               <span>월말 반영</span>
               <strong>4건</strong>
             </button>
+          </section>
+
+          <section class="panel workflow-panel">
+            <div class="panel-heading">
+              <div>
+                <span class="section-kicker">처리 흐름</span>
+                <h2>접수부터 월말 반영까지</h2>
+              </div>
+              <mark class="mark ok">표준 절차</mark>
+            </div>
+            <div class="workflow-steps">
+              <article>
+                <span>01</span>
+                <strong>신청 접수</strong>
+                <p>근무상황과 필요 증빙을 함께 접수</p>
+              </article>
+              <article>
+                <span>02</span>
+                <strong>규칙 확인</strong>
+                <p>기관 기준표로 증빙·결재선 자동 확인</p>
+              </article>
+              <article>
+                <span>03</span>
+                <strong>결재 처리</strong>
+                <p>담당자 검토 후 팀장 또는 확인관 승인</p>
+              </article>
+              <article>
+                <span>04</span>
+                <strong>월말 반영</strong>
+                <p>승인 완료 건만 입력 대상 목록으로 분리</p>
+              </article>
+            </div>
           </section>
 
           <section class="panel today-panel">
@@ -701,7 +741,7 @@
             <div class="panel-heading">
               <div>
                   <span class="section-kicker">보고서</span>
-                  <h2>월말 복무기록 점검</h2>
+                  <h2>월말 입력 전 점검</h2>
               </div>
               <button class="primary-button" type="button">
                 <i data-lucide="printer"></i>
@@ -712,7 +752,33 @@
               <article><span>출근점검</span><strong>99%</strong><p>1건 미점검</p></article>
               <article><span>휴가 증빙</span><strong>92%</strong><p>2건 보완 필요</p></article>
               <article><span>면담 기록</span><strong>84%</strong><p>분기 입력 대상 3명</p></article>
-              <article><span>기록 연계</span><strong>대기</strong><p>월말 일괄 반영 준비</p></article>
+              <article><span>입력 대상</span><strong>4건</strong><p>승인 완료 건만 분리</p></article>
+            </div>
+          </section>
+          <section class="panel">
+            <div class="panel-heading">
+              <div>
+                <span class="section-kicker">입력 대상</span>
+                <h2>공식 기록계 입력 전 검토</h2>
+              </div>
+              <mark class="mark wait">담당자 확인</mark>
+            </div>
+            <div class="month-close-table">
+              <div class="month-row month-head">
+                <span>구분</span><span>대상</span><span>상태</span><span>조치</span>
+              </div>
+              <div class="month-row">
+                <span>연가</span><span>요원 A · 2026.06.18</span><span><mark class="mark ok">결재완료</mark></span><span>월말 입력 대상</span>
+              </div>
+              <div class="month-row">
+                <span>병가</span><span>요원 C · 2026.06.04</span><span><mark class="mark risk">증빙대기</mark></span><span>입력 보류</span>
+              </div>
+              <div class="month-row">
+                <span>공가</span><span>요원 D · 교육 참석</span><span><mark class="mark ok">확인완료</mark></span><span>공가 분류</span>
+              </div>
+              <div class="month-row">
+                <span>반차</span><span>요원 A · 오후 반차</span><span><mark class="mark wait">출결확인</mark></span><span>퇴실 시각 대조</span>
+              </div>
             </div>
           </section>
           <div class="insight-layout">
@@ -849,14 +915,14 @@
             <section class="panel">
               <div class="panel-heading">
                 <div>
-                  <span class="section-kicker">자료 연계</span>
-                  <h2>자료 관리</h2>
+                  <span class="section-kicker">월말 입력</span>
+                  <h2>입력 대상 관리</h2>
                 </div>
               </div>
               <div class="integration-list">
                 <article><i data-lucide="file-spreadsheet"></i><div><strong>엑셀 일괄 업로드</strong><p>복무자, 연가 이력, 근무지 목록</p></div><mark class="mark ok">준비</mark></article>
                 <article><i data-lucide="calendar-sync"></i><div><strong>캘린더 내보내기</strong><p>휴가, 교육, 출장 일정</p></div><mark class="mark info">설정</mark></article>
-                <article><i data-lucide="database-zap"></i><div><strong>월말 반영</strong><p>검토 완료 건만 월말 입력 대상으로 분리</p></div><mark class="mark wait">4건</mark></article>
+                <article><i data-lucide="database-zap"></i><div><strong>월말 입력 대상</strong><p>검토 완료 건만 별도 목록으로 분리</p></div><mark class="mark wait">4건</mark></article>
                 <article><i data-lucide="shield-check"></i><div><strong>권한 로그</strong><p>담당자, 팀장, 기관장 접근 이력</p></div><mark class="mark ok">기록</mark></article>
               </div>
             </section>
