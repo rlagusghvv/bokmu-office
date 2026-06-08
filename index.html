@@ -1,0 +1,931 @@
+<!doctype html>
+<html lang="ko">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>복무ON Office</title>
+    <link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 64 64'%3E%3Crect width='64' height='64' rx='12' fill='%23f4c95d'/%3E%3Ctext x='32' y='40' text-anchor='middle' font-family='Arial' font-size='28' font-weight='700' fill='%23102a2b'%3EB%3C/text%3E%3C/svg%3E" />
+    <link rel="stylesheet" href="./styles.css" />
+    <script defer src="https://unpkg.com/lucide@0.468.0/dist/umd/lucide.js"></script>
+    <script defer src="./app.js"></script>
+  </head>
+  <body>
+    <div class="app-shell">
+      <aside class="sidebar" aria-label="주요 메뉴">
+        <div class="brand">
+          <div class="brand-mark" aria-hidden="true">B</div>
+          <div>
+            <strong>복무ON</strong>
+            <span>Office</span>
+          </div>
+        </div>
+
+        <nav class="side-nav">
+          <button class="nav-item active" data-view="dashboard">
+            <i data-lucide="layout-dashboard"></i>
+            <span>홈</span>
+          </button>
+          <button class="nav-item" data-view="leave">
+            <i data-lucide="calendar-check"></i>
+            <span>근무상황</span>
+          </button>
+          <button class="nav-item" data-view="approval">
+            <i data-lucide="stamp"></i>
+            <span>결재함</span>
+          </button>
+          <button class="nav-item" data-view="schedule">
+            <i data-lucide="radio-tower"></i>
+            <span>출근점검</span>
+          </button>
+          <button class="nav-item" data-view="policies">
+            <i data-lucide="sliders-horizontal"></i>
+            <span>운영설정</span>
+          </button>
+        </nav>
+
+        <div class="sidebar-status">
+          <span class="status-dot"></span>
+          <div>
+            <strong>규칙표 적용중</strong>
+            <span>행정지원형 v1.2</span>
+          </div>
+        </div>
+      </aside>
+
+      <main class="workspace">
+        <header class="topbar">
+          <div>
+            <p class="eyebrow">김포시 복무관리 · 2026.06.08</p>
+            <h1 id="view-title">대시보드</h1>
+          </div>
+          <div class="top-actions">
+            <button class="secondary-button top-cta" type="button" data-jump="leave">
+              <i data-lucide="calendar-plus"></i>
+              <span>신청 등록</span>
+            </button>
+            <button class="primary-button top-cta" type="button" data-jump="policies">
+              <i data-lucide="sliders-horizontal"></i>
+              <span>운영설정</span>
+            </button>
+          </div>
+        </header>
+
+        <section class="view active" id="dashboard-view" aria-labelledby="view-title">
+          <div class="metrics-grid">
+            <article class="metric-card accent-teal">
+              <span>출근 확인</span>
+              <strong>18 / 19</strong>
+              <p>미확인 1</p>
+            </article>
+            <article class="metric-card accent-amber">
+              <span>결재 대기</span>
+              <strong id="pending-count">7건</strong>
+              <p>휴가 4 · 증빙 3</p>
+            </article>
+            <article class="metric-card accent-violet">
+              <span>증빙 보완</span>
+              <strong>3건</strong>
+              <p>병가 2 · 공가 1</p>
+            </article>
+            <article class="metric-card accent-rose">
+              <span>월말 점검</span>
+              <strong>4건</strong>
+              <p>이번 주</p>
+            </article>
+          </div>
+
+          <section class="ops-strip" aria-label="운영 허브">
+            <button class="ops-card" type="button" data-jump="policies">
+              <i data-lucide="table-properties"></i>
+              <span>근무 규칙</span>
+              <strong>v1.2</strong>
+            </button>
+            <button class="ops-card" type="button" data-jump="approval">
+              <i data-lucide="route"></i>
+              <span>결재선</span>
+              <strong>적용</strong>
+            </button>
+            <button class="ops-card" type="button" data-jump="schedule">
+              <i data-lucide="radio-tower"></i>
+              <span>출결 위치</span>
+              <strong>3개</strong>
+            </button>
+            <button class="ops-card" type="button" data-jump="policies">
+              <i data-lucide="database-zap"></i>
+              <span>월말 반영</span>
+              <strong>4건</strong>
+            </button>
+          </section>
+
+          <section class="panel today-panel">
+            <div class="panel-heading">
+              <div>
+                <span class="section-kicker">오늘</span>
+                <h2>처리 대상</h2>
+              </div>
+              <button class="ghost-button" type="button" data-jump="approval">
+                <i data-lucide="list-checks"></i>
+                <span>전체 보기</span>
+              </button>
+            </div>
+            <div class="work-grid" aria-label="오늘 처리 항목">
+              <article>
+                <span>승인</span>
+                <strong>요원 A 연가 신청</strong>
+                <p>2026.06.18 · 팀장 결재 대기</p>
+              </article>
+              <article>
+                <span>증빙</span>
+                <strong>요원 C 병가 보완</strong>
+                <p>진료확인서 미첨부</p>
+              </article>
+              <article>
+                <span>출결</span>
+                <strong>오후 반차 출입확인</strong>
+                <p>13:04 퇴실</p>
+              </article>
+              <article>
+                <span>마감</span>
+                <strong>6월 4주차 점검</strong>
+                <p>월말 반영 4건</p>
+              </article>
+            </div>
+          </section>
+
+          <div class="dashboard-layout">
+            <section class="panel action-panel">
+              <div class="panel-heading">
+                <div>
+                  <span class="section-kicker">담당자 업무</span>
+                  <h2>처리 목록</h2>
+                </div>
+                <button class="ghost-button" type="button">
+                  <i data-lucide="plus"></i>
+                  <span>추가</span>
+                </button>
+              </div>
+              <ul class="check-list">
+                <li>
+                  <input type="checkbox" id="todo-1" checked />
+                  <label for="todo-1">오전 출근점검 완료 여부 확인</label>
+                  <span>완료</span>
+                </li>
+                <li>
+                  <input type="checkbox" id="todo-2" />
+                  <label for="todo-2">병가 증빙 미첨부 2건 요청</label>
+                  <span>11:30</span>
+                </li>
+                <li>
+                  <input type="checkbox" id="todo-3" />
+                  <label for="todo-3">특별휴가 공문 초안 검토</label>
+                  <span>14:00</span>
+                </li>
+                <li>
+                  <input type="checkbox" id="todo-4" />
+                  <label for="todo-4">월간 일일복무상황부 출력 전 대조</label>
+                  <span>17:00</span>
+                </li>
+              </ul>
+            </section>
+
+            <section class="panel">
+              <div class="panel-heading">
+              <div>
+                  <span class="section-kicker">보완 대상</span>
+                  <h2>확인 목록</h2>
+              </div>
+              <mark class="mark wait">4건</mark>
+            </div>
+            <div class="queue-list">
+              <article>
+                  <span>증빙</span>
+                  <strong>요원 C 병가 증빙 미첨부</strong>
+                  <p>보완 요청 대상</p>
+              </article>
+              <article>
+                  <span>출결</span>
+                  <strong>요원 A 오후 반차 출입확인</strong>
+                  <p>퇴실 13:04 · 신청 시작 13:00</p>
+              </article>
+              <article>
+                  <span>마감</span>
+                  <strong>6월 4주차 근무상황부 확인</strong>
+                  <p>결재 완료 건만 반영</p>
+              </article>
+            </div>
+            </section>
+          </div>
+
+          <div class="dashboard-layout secondary-layout optional-section" hidden>
+            <section class="panel">
+              <div class="panel-heading">
+                <div>
+                  <span class="section-kicker">근무상황</span>
+                  <h2>6월 복무 캘린더</h2>
+                </div>
+                <button class="icon-button soft" type="button" aria-label="캘린더 설정">
+                  <i data-lucide="settings"></i>
+                </button>
+              </div>
+              <div class="mini-calendar" aria-label="6월 복무 캘린더">
+                <span>월</span><span>화</span><span>수</span><span>목</span><span>금</span>
+                <button class="day normal">1</button>
+                <button class="day leave">2</button>
+                <button class="day normal">3</button>
+                <button class="day sick">4</button>
+                <button class="day normal">5</button>
+                <button class="day normal">8</button>
+                <button class="day pending">9</button>
+                <button class="day normal">10</button>
+                <button class="day training">11</button>
+                <button class="day normal">12</button>
+                <button class="day normal">15</button>
+                <button class="day leave">16</button>
+                <button class="day normal">17</button>
+                <button class="day normal">18</button>
+                <button class="day pending">19</button>
+              </div>
+              <div class="legend">
+                <span><i class="legend-dot normal"></i>정상</span>
+                <span><i class="legend-dot leave"></i>연가</span>
+                <span><i class="legend-dot sick"></i>병가</span>
+                <span><i class="legend-dot training"></i>교육</span>
+              </div>
+            </section>
+          </div>
+
+          <section class="panel table-panel optional-section" hidden>
+            <div class="panel-heading">
+              <div>
+                <span class="section-kicker">복무자 현황</span>
+                <h2>리스크 우선순위</h2>
+              </div>
+              <button class="primary-button" type="button" data-jump="leave">
+                <i data-lucide="calendar-plus"></i>
+                <span>휴가 신청 열기</span>
+              </button>
+            </div>
+            <div class="data-table">
+              <div class="table-row table-head">
+                <span>성명</span><span>상태</span><span>연가</span><span>최근 이슈</span><span>다음 조치</span>
+              </div>
+              <div class="table-row">
+                <span>요원 B</span><span><mark class="mark ok">정상근무</mark></span><span>9일</span><span>월간 서명 완료</span><span>없음</span>
+              </div>
+              <div class="table-row">
+                <span>요원 A</span><span><mark class="mark wait">결재대기</mark></span><span>5일</span><span>연가 신청 검토</span><span>팀장 결재</span>
+              </div>
+              <div class="table-row">
+                <span>요원 C</span><span><mark class="mark risk">증빙필요</mark></span><span>12일</span><span>병가 확인서 미첨부</span><span>자료 요청</span>
+              </div>
+              <div class="table-row">
+                <span>요원 D</span><span><mark class="mark info">교육</mark></span><span>7일</span><span>개인정보보호 교육</span><span>수료 반영</span>
+              </div>
+            </div>
+          </section>
+        </section>
+
+        <section class="view" id="people-view" aria-labelledby="view-title">
+          <div class="people-layout">
+            <section class="panel roster-panel">
+              <div class="panel-heading">
+                <div>
+                  <span class="section-kicker">복무자</span>
+                  <h2>복무자 디렉터리</h2>
+                </div>
+                <div class="segmented">
+                  <button class="selected" type="button">전체</button>
+                  <button type="button">주의</button>
+                  <button type="button">해제임박</button>
+                </div>
+              </div>
+              <div class="people-list">
+                <button class="person-row selected" type="button">
+                  <span class="avatar">이</span>
+                  <span><strong>요원 A</strong><small>행정지원 · 2년차</small></span>
+                  <mark class="mark wait">결재대기</mark>
+                </button>
+                <button class="person-row" type="button">
+                  <span class="avatar teal">박</span>
+                  <span><strong>요원 B</strong><small>민원안내 · 1년차</small></span>
+                  <mark class="mark ok">정상</mark>
+                </button>
+                <button class="person-row" type="button">
+                  <span class="avatar rose">최</span>
+                  <span><strong>요원 C</strong><small>시설점검 · 1년차</small></span>
+                  <mark class="mark risk">증빙</mark>
+                </button>
+                <button class="person-row" type="button">
+                  <span class="avatar violet">정</span>
+                  <span><strong>요원 D</strong><small>교육지원 · 2년차</small></span>
+                  <mark class="mark info">교육</mark>
+                </button>
+              </div>
+            </section>
+
+            <section class="panel profile-panel">
+              <div class="profile-head">
+                <span class="avatar large">이</span>
+                <div>
+                  <span class="section-kicker">행정지원 · 2년차</span>
+                  <h2>요원 A</h2>
+                  <p>소집해제 예정 2026.12.12 · 담당자 김담당</p>
+                </div>
+                <mark class="mark wait">연가 결재중</mark>
+              </div>
+              <div class="profile-stats">
+                <article><span>연가 잔여</span><strong>5일</strong></article>
+                <article><span>병가 사용</span><strong>1일</strong></article>
+                <article><span>서류 완성도</span><strong>94%</strong></article>
+                <article><span>면담 주기</span><strong>정상</strong></article>
+              </div>
+              <div class="profile-sections">
+                <article>
+                  <h3>담당 업무</h3>
+                  <p>민원 서류 출력 보조, 방문자 안내, 월말 복무상황부 대조</p>
+                </article>
+                <article>
+                  <h3>최근 이력</h3>
+                  <p>6월 연가 신청, 5월 직무교육 수료, 분기 면담 완료</p>
+                </article>
+                <article>
+                  <h3>다음 조치</h3>
+                  <p>팀장 결재 후 휴가 캘린더와 월말 반영 목록에 표시</p>
+                </article>
+              </div>
+            </section>
+          </div>
+
+          <section class="panel">
+            <div class="panel-heading">
+              <div>
+                <span class="section-kicker">조직 운영</span>
+                <h2>근무지별 현황</h2>
+              </div>
+            </div>
+            <div class="org-grid">
+              <article><span>행정실</span><strong>7명</strong><p>결재대기 2 · 서류누락 1</p></article>
+              <article><span>민원실</span><strong>5명</strong><p>정상근무 5</p></article>
+              <article><span>복지지원</span><strong>4명</strong><p>교육 1 · 특별휴가 검토 1</p></article>
+              <article><span>시설관리</span><strong>3명</strong><p>병가 증빙 1</p></article>
+            </div>
+          </section>
+        </section>
+
+        <section class="view" id="leave-view" aria-labelledby="view-title">
+          <div class="split-layout">
+            <section class="panel form-panel">
+              <div class="panel-heading">
+                <div>
+                  <span class="section-kicker">신청서</span>
+                  <h2>근무상황 신청</h2>
+                </div>
+                <mark class="mark info">작성중</mark>
+              </div>
+              <form id="leave-form" class="office-form">
+                <label>
+                  복무자
+                  <select id="member-name" required>
+                    <option>요원 A</option>
+                    <option>요원 B</option>
+                    <option>요원 C</option>
+                    <option>요원 D</option>
+                  </select>
+                </label>
+                <label>
+                  근무상황 구분
+                  <select id="leave-type" required>
+                    <option>연가</option>
+                    <option>병가</option>
+                    <option>공가</option>
+                    <option>특별휴가</option>
+                    <option>허가조퇴</option>
+                    <option>병가지각</option>
+                  </select>
+                </label>
+                <div class="form-grid">
+                  <label>
+                    시작일
+                    <input id="start-date" type="date" value="2026-06-18" required />
+                  </label>
+                  <label>
+                    종료일
+                    <input id="end-date" type="date" value="2026-06-18" required />
+                  </label>
+                </div>
+                <label>
+                  사유
+                  <textarea id="leave-reason" rows="4" placeholder="담당자가 검토할 수 있는 사유를 입력"></textarea>
+                </label>
+                <div class="attachment-drop">
+                  <i data-lucide="paperclip"></i>
+                  <span>증빙자료 첨부</span>
+                  <small>병가 3일 이하: 진료확인서, 처방전, 소견서 등</small>
+                </div>
+                <button class="primary-button full" type="submit">
+                  <i data-lucide="send"></i>
+                  <span>신청하기</span>
+                </button>
+              </form>
+            </section>
+
+            <section class="panel">
+              <div class="panel-heading">
+                <div>
+                  <span class="section-kicker">잔여현황</span>
+                  <h2>잔여 휴가 현황</h2>
+                </div>
+              </div>
+              <div class="quota-list">
+                <div>
+                  <span>연가</span>
+                  <strong>5 / 15일</strong>
+                  <meter min="0" max="15" value="10"></meter>
+                </div>
+                <div>
+                  <span>병가</span>
+                  <strong>4 / 30일</strong>
+                  <meter min="0" max="30" value="4"></meter>
+                </div>
+                <div>
+                  <span>특별휴가</span>
+                  <strong>2 / 5일</strong>
+                  <meter min="0" max="5" value="2"></meter>
+                </div>
+              </div>
+              <div class="rule-preview" aria-live="polite">
+                <div class="rule-preview-head">
+                  <span class="section-kicker">규칙 확인</span>
+                  <strong id="rule-title">연가</strong>
+                </div>
+                <dl>
+                  <div>
+                    <dt>처리 기준</dt>
+                    <dd id="rule-standard">잔여일수와 업무 공백을 확인한 뒤 담당자·팀장 결재</dd>
+                  </div>
+                  <div>
+                    <dt>증빙</dt>
+                    <dd id="rule-evidence">기본 증빙 없음, 집중 사용 시 사유 확인</dd>
+                  </div>
+                  <div>
+                    <dt>출결 확인</dt>
+                    <dd id="rule-attendance">퇴실 기록과 휴가 시작 시각 확인</dd>
+                  </div>
+                  <div>
+                    <dt>기록</dt>
+                    <dd id="rule-record">결재 후 월말 반영 대기</dd>
+                  </div>
+                </dl>
+              </div>
+              <div class="rule-box">
+                <strong>반차·지각 환산 규칙</strong>
+                <p>기관 근무시간표에 맞춰 반차, 지각, 조퇴, 외출 환산 방식을 설정합니다. 결재선과 증빙 조건은 템플릿별로 관리합니다.</p>
+              </div>
+              <div class="policy-checks">
+                <article><i data-lucide="check-circle-2"></i><span>잔여 연가 범위 확인</span></article>
+                <article><i data-lucide="check-circle-2"></i><span>업무 공백 일정 확인</span></article>
+                <article><i data-lucide="circle-alert"></i><span>증빙 제출 여부 대기</span></article>
+              </div>
+            </section>
+          </div>
+
+          <section class="panel">
+            <div class="panel-heading">
+              <div>
+                <span class="section-kicker">최근 신청</span>
+                <h2>휴가 결재 라인</h2>
+              </div>
+            </div>
+            <div id="request-list" class="request-list"></div>
+          </section>
+        </section>
+
+        <section class="view" id="approval-view" aria-labelledby="view-title">
+          <div class="approval-summary">
+            <article><span>평균 처리</span><strong>4.2시간</strong><p>전월 대비 18% 단축</p></article>
+            <article><span>반려율</span><strong>6%</strong><p>증빙 누락 중심</p></article>
+            <article><span>결재선 적용</span><strong>82%</strong><p>근무지별 결재선 적용</p></article>
+          </div>
+          <section class="panel">
+            <div class="panel-heading">
+              <div>
+                <span class="section-kicker">전자결재</span>
+                <h2>결재 대기함</h2>
+              </div>
+              <div class="segmented">
+                <button class="selected" type="button">전체</button>
+                <button type="button">휴가</button>
+                <button type="button">업무</button>
+              </div>
+            </div>
+            <div class="approval-list">
+              <article class="approval-item">
+                <div class="approval-icon"><i data-lucide="file-check"></i></div>
+                <div>
+                  <strong>요원 A 연가 신청</strong>
+                  <p>2026.06.18 · 개인용무 · 담당자 검토 완료</p>
+                </div>
+                <button class="primary-button compact" type="button">승인</button>
+              </article>
+              <article class="approval-item">
+                <div class="approval-icon amber"><i data-lucide="file-warning"></i></div>
+                <div>
+                  <strong>요원 C 병가 증빙 보완</strong>
+                  <p>진료확인서 미첨부 · 신청자에게 자료 요청 필요</p>
+                </div>
+                <button class="secondary-button compact" type="button">보완</button>
+              </article>
+              <article class="approval-item">
+                <div class="approval-icon violet"><i data-lucide="clipboard-list"></i></div>
+                <div>
+                  <strong>월간 근태 대조표 확인</strong>
+                <p>일일복무상황부 출력 전 대장 일치 확인</p>
+                </div>
+                <button class="primary-button compact" type="button">확인</button>
+              </article>
+            </div>
+          </section>
+        </section>
+
+        <section class="view" id="schedule-view" aria-labelledby="view-title">
+          <section class="panel">
+            <div class="panel-heading">
+              <div>
+                <span class="section-kicker">일정</span>
+                <h2>근무편성 타임라인</h2>
+              </div>
+              <button class="ghost-button" type="button">
+                <i data-lucide="download"></i>
+                <span>내보내기</span>
+              </button>
+            </div>
+            <div class="timeline">
+              <div><time>09:00</time><span>전체 출근점검</span><mark class="mark ok">자동확인</mark></div>
+              <div><time>10:30</time><span>개인정보보호 교육</span><mark class="mark info">교육</mark></div>
+              <div><time>13:30</time><span>민원 안내 지원 교대</span><mark class="mark wait">배정</mark></div>
+              <div><time>16:40</time><span>퇴근 전 일일복무상황 확인</span><mark class="mark risk">서명필요</mark></div>
+            </div>
+          </section>
+          <section class="panel attendance-panel">
+            <div class="panel-heading">
+              <div>
+                <span class="section-kicker">출결 확인</span>
+                <h2>출입신호 확인</h2>
+              </div>
+              <mark class="mark ok">로그 기록</mark>
+            </div>
+            <div class="beacon-grid">
+              <article>
+                <i data-lucide="radio-tower"></i>
+                <strong>민원실 입구</strong>
+                <p>08:58 입실 · 신뢰구간 통과</p>
+              </article>
+              <article>
+                <i data-lucide="door-open"></i>
+                <strong>오후 반차 퇴실</strong>
+                <p>13:04 퇴실 · 신청 시간 일치</p>
+              </article>
+              <article>
+                <i data-lucide="shield-alert"></i>
+                <strong>예외 처리</strong>
+                <p>단말 분실, 외부 출장, 신호 장애는 담당자 확인 후 기록</p>
+              </article>
+            </div>
+          </section>
+        </section>
+
+        <section class="view" id="tasks-view" aria-labelledby="view-title">
+          <section class="kanban-board" aria-label="업무보드">
+            <div class="kanban-column">
+              <h2>접수</h2>
+              <article class="task-card">
+                <strong>장애학생 활동지원 월간 기록 정리</strong>
+                <p>특별휴가 산정 근거로 연결</p>
+                <span>운영지원과</span>
+              </article>
+              <article class="task-card">
+                <strong>민원 안내 데스크 교대표 작성</strong>
+                <p>오전/오후 근무편성 반영</p>
+                <span>행정실</span>
+              </article>
+            </div>
+            <div class="kanban-column">
+              <h2>진행</h2>
+              <article class="task-card">
+                <strong>6월 일일복무상황부 대조</strong>
+                <p>서명 누락 2건 확인 중</p>
+                <span>복무담당</span>
+              </article>
+            </div>
+            <div class="kanban-column">
+              <h2>검토</h2>
+              <article class="task-card">
+                <strong>병가 증빙 파일 정리</strong>
+                <p>월말 반영 전 첨부 확인</p>
+                <span>근무지 담당</span>
+              </article>
+            </div>
+            <div class="kanban-column">
+              <h2>완료</h2>
+              <article class="task-card done">
+                <strong>월 1회 직무교육 기록</strong>
+                <p>수료 대상자 반영 완료</p>
+                <span>교육담당</span>
+              </article>
+            </div>
+          </section>
+        </section>
+
+        <section class="view" id="handover-view" aria-labelledby="view-title">
+          <section class="panel">
+            <div class="panel-heading">
+              <div>
+                <span class="section-kicker">인수인계</span>
+                <h2>복무자별 업무 매뉴얼</h2>
+              </div>
+              <button class="primary-button" type="button">
+                <i data-lucide="file-plus-2"></i>
+                <span>문서 추가</span>
+              </button>
+            </div>
+            <div class="handover-grid">
+              <article>
+                <strong>민원 안내 데스크</strong>
+                <p>방문 목적 분류, 담당 부서 연결, 민원실 위치 안내</p>
+                <span>최근 수정: 요원 B</span>
+              </article>
+              <article>
+                <strong>제복 구매 확인</strong>
+                <p>배정 직후 품목 확인, 사이즈 기록, 수령 확인서 보관</p>
+                <span>최근 수정: 김담당</span>
+              </article>
+              <article>
+                <strong>월말 반영</strong>
+                <p>출근점검, 유고사항, 일일복무상황부 출력 대조</p>
+                <span>최근 수정: 요원 A</span>
+              </article>
+            </div>
+          </section>
+        </section>
+
+        <section class="view" id="care-view" aria-labelledby="view-title">
+          <section class="panel">
+            <div class="panel-heading">
+              <div>
+                <span class="section-kicker">고충·면담</span>
+                <h2>분기 관리 기록</h2>
+              </div>
+            </div>
+            <div class="care-list">
+              <article>
+                <time>2026.06.03</time>
+                <strong>정기 면담</strong>
+                <p>업무 난이도와 휴가 계획 확인. 특이사항 없음.</p>
+              </article>
+              <article>
+                <time>2026.06.07</time>
+                <strong>고충 접수</strong>
+                <p>근무지 동선 조정 요청. 담당자 검토 후 6월 10일 반영 예정.</p>
+              </article>
+              <article>
+                <time>2026.06.10</time>
+                <strong>후속 조치</strong>
+                <p>오후 민원 안내 업무를 문서 정리 업무로 일부 조정.</p>
+              </article>
+            </div>
+          </section>
+        </section>
+
+        <section class="view" id="reports-view" aria-labelledby="view-title">
+          <section class="panel">
+            <div class="panel-heading">
+              <div>
+                  <span class="section-kicker">보고서</span>
+                  <h2>월말 복무기록 점검</h2>
+              </div>
+              <button class="primary-button" type="button">
+                <i data-lucide="printer"></i>
+                <span>출력</span>
+              </button>
+            </div>
+            <div class="report-grid">
+              <article><span>출근점검</span><strong>99%</strong><p>1건 미점검</p></article>
+              <article><span>휴가 증빙</span><strong>92%</strong><p>2건 보완 필요</p></article>
+              <article><span>면담 기록</span><strong>84%</strong><p>분기 입력 대상 3명</p></article>
+              <article><span>기록 연계</span><strong>대기</strong><p>월말 일괄 반영 준비</p></article>
+            </div>
+          </section>
+          <div class="insight-layout">
+            <section class="panel">
+              <div class="panel-heading">
+                <div>
+                  <span class="section-kicker">통계</span>
+                  <h2>휴가 사용 편차</h2>
+                </div>
+              </div>
+              <div class="bar-list">
+                <div><span>행정실</span><i style="--value: 72%"></i><strong>72%</strong></div>
+                <div><span>민원실</span><i style="--value: 48%"></i><strong>48%</strong></div>
+                <div><span>복지지원</span><i style="--value: 61%"></i><strong>61%</strong></div>
+                <div><span>시설관리</span><i style="--value: 36%"></i><strong>36%</strong></div>
+              </div>
+            </section>
+            <section class="panel">
+              <div class="panel-heading">
+                <div>
+                  <span class="section-kicker">감사 대비</span>
+                  <h2>증빙 완성도</h2>
+                </div>
+              </div>
+              <div class="audit-list">
+                <article><mark class="mark ok">완료</mark><span>연가 신청서 결재 이력</span></article>
+                <article><mark class="mark wait">대기</mark><span>병가 진료확인서 2건</span></article>
+                <article><mark class="mark ok">완료</mark><span>개인정보보호 교육 기록</span></article>
+                <article><mark class="mark risk">주의</mark><span>수기대장 서명 누락 2건</span></article>
+              </div>
+            </section>
+          </div>
+        </section>
+
+        <section class="view" id="policies-view" aria-labelledby="view-title">
+          <div class="policy-layout">
+            <section class="panel rule-matrix-panel">
+              <div class="panel-heading">
+                <div>
+                  <span class="section-kicker">기준표</span>
+                  <h2>기관별 근무상황 규칙표</h2>
+                </div>
+                <mark class="mark ok">행정지원형 v1.2</mark>
+              </div>
+              <div class="rule-matrix">
+                <div class="rule-row rule-head">
+                  <span>구분</span><span>처리 기준</span><span>증빙</span><span>결재·기록</span>
+                </div>
+                <div class="rule-row">
+                  <span>연가</span><span>잔여일수·업무공백 확인</span><span>집중 사용 시 사유 확인</span><span>담당자→팀장→월말 반영</span>
+                </div>
+                <div class="rule-row">
+                  <span>반차</span><span>기관 근무시간표 기준 환산</span><span>불필요</span><span>출입신호 확인 후 기록</span>
+                </div>
+                <div class="rule-row">
+                  <span>병가</span><span>일수별 증빙 조건 확인</span><span>진료확인서 등 보호 저장</span><span>담당자 보완→팀장 결재</span>
+                </div>
+                <div class="rule-row">
+                  <span>공가</span><span>공문·교육 일정과 매칭</span><span>공문 또는 수료내역</span><span>담당자 확인 후 자동 분류</span>
+                </div>
+              </div>
+            </section>
+
+            <section class="panel">
+              <div class="panel-heading">
+                <div>
+                  <span class="section-kicker">정책</span>
+                  <h2>근태·휴가 운영 규칙</h2>
+                </div>
+                <button class="primary-button" type="button">
+                  <i data-lucide="save"></i>
+                  <span>저장</span>
+                </button>
+              </div>
+              <div class="settings-list">
+                <article>
+                  <div><strong>연가 자동 검토</strong><p>잔여일수, 집중 사용, 업무 공백 조건 확인</p></div>
+                  <label class="switch"><input type="checkbox" checked /><span></span></label>
+                </article>
+                <article>
+                  <div><strong>병가 증빙 알림</strong><p>3일 이하, 3일 초과 기준에 따라 제출물 표시</p></div>
+                  <label class="switch"><input type="checkbox" checked /><span></span></label>
+                </article>
+                <article>
+                  <div><strong>월말 마감 잠금</strong><p>마감 후 결재 완료 건만 월말 반영 목록으로 이동</p></div>
+                  <label class="switch"><input type="checkbox" checked /><span></span></label>
+                </article>
+                <article>
+                  <div><strong>출입신호 확인</strong><p>출근, 반차, 조퇴 기록을 기관 출입 신호와 비교</p></div>
+                  <label class="switch"><input type="checkbox" checked /><span></span></label>
+                </article>
+              </div>
+            </section>
+
+            <section class="panel">
+              <div class="panel-heading">
+                <div>
+                  <span class="section-kicker">템플릿</span>
+                <h2>기관 유형</h2>
+                </div>
+                <button class="ghost-button" type="button">
+                  <i data-lucide="copy-plus"></i>
+                  <span>템플릿 복제</span>
+                </button>
+              </div>
+              <div class="template-list">
+                <article class="selected">
+                  <strong>행정지원형</strong>
+                  <p>민원 안내, 문서 정리, 월말 복무기록 대조</p>
+                  <mark class="mark ok">적용중</mark>
+                </article>
+                <article>
+                  <strong>사회복지시설형</strong>
+                  <p>프로그램 지원, 이용자 동선, 활동기록 중심</p>
+                  <mark class="mark info">템플릿</mark>
+                </article>
+                <article>
+                  <strong>보건의료형</strong>
+                  <p>신체 제한 임무, 안전교육, 병가 증빙 보호</p>
+                  <mark class="mark wait">검토</mark>
+                </article>
+                <article>
+                  <strong>교육문화·환경안전형</strong>
+                  <p>일정표, 현장점검, 위험업무 제한 체크</p>
+                  <mark class="mark info">템플릿</mark>
+                </article>
+              </div>
+              <div class="rule-box">
+                <strong>공통 기준</strong>
+                <p>기관별 기준은 템플릿으로 조정하고, 결재 완료 건만 월말 반영 목록에 남깁니다. 개인정보 보호 설정은 모든 템플릿에 기본 적용됩니다.</p>
+              </div>
+            </section>
+
+            <section class="panel">
+              <div class="panel-heading">
+                <div>
+                  <span class="section-kicker">자료 연계</span>
+                  <h2>자료 관리</h2>
+                </div>
+              </div>
+              <div class="integration-list">
+                <article><i data-lucide="file-spreadsheet"></i><div><strong>엑셀 일괄 업로드</strong><p>복무자, 연가 이력, 근무지 목록</p></div><mark class="mark ok">준비</mark></article>
+                <article><i data-lucide="calendar-sync"></i><div><strong>캘린더 내보내기</strong><p>휴가, 교육, 출장 일정</p></div><mark class="mark info">설정</mark></article>
+                <article><i data-lucide="database-zap"></i><div><strong>월말 반영</strong><p>검토 완료 건만 월말 입력 대상으로 분리</p></div><mark class="mark wait">4건</mark></article>
+                <article><i data-lucide="shield-check"></i><div><strong>권한 로그</strong><p>담당자, 팀장, 기관장 접근 이력</p></div><mark class="mark ok">기록</mark></article>
+              </div>
+            </section>
+
+            <section class="panel privacy-panel">
+              <div class="panel-heading">
+                <div>
+                <span class="section-kicker">보안·개인정보</span>
+                <h2>개인정보 보호 설정</h2>
+              </div>
+                <mark class="mark ok">기본 적용</mark>
+              </div>
+              <div class="security-grid">
+                <article>
+                  <i data-lucide="key-round"></i>
+                  <div>
+                    <strong>역할기반 접근</strong>
+                    <p>복무자·근무지 담당·기관 담당·기관장 권한을 분리</p>
+                  </div>
+                </article>
+                <article>
+                  <i data-lucide="file-lock-2"></i>
+                  <div>
+                    <strong>증빙파일 보호</strong>
+                    <p>병가·면담 자료는 암호화 저장, 열람 사유 기록</p>
+                  </div>
+                </article>
+                <article>
+                  <i data-lucide="scan-eye"></i>
+                  <div>
+                    <strong>화면 마스킹</strong>
+                    <p>연락처·생년월일은 기본 비표시, 필요 시 사유 입력</p>
+                  </div>
+                </article>
+                <article>
+                  <i data-lucide="history"></i>
+                  <div>
+                    <strong>접속기록 점검</strong>
+                    <p>조회·수정·다운로드 로그를 월 1회 이상 검토</p>
+                  </div>
+                </article>
+                <article>
+                  <i data-lucide="archive-x"></i>
+                  <div>
+                    <strong>보유기간·파기</strong>
+                    <p>복무 종료 후 기관 기준에 따라 분리 보관 또는 파기</p>
+                  </div>
+                </article>
+                <article>
+                  <i data-lucide="lock-keyhole"></i>
+                  <div>
+                    <strong>연계 전 승인</strong>
+                    <p>월말 반영, 외부 전송, 자료 다운로드는 별도 승인 적용</p>
+                  </div>
+                </article>
+                <article>
+                  <i data-lucide="clipboard-check"></i>
+                  <div>
+                    <strong>영향평가 사전점검</strong>
+                    <p>실제 운영 전 개인정보파일, 위탁, 보존기간 검토 항목 표시</p>
+                  </div>
+                </article>
+              </div>
+            </section>
+          </div>
+        </section>
+      </main>
+    </div>
+
+    <div id="toast" class="toast" role="status" aria-live="polite"></div>
+  </body>
+</html>
